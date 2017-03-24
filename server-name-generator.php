@@ -1,9 +1,7 @@
 <!-- http://codeup.dev/php_lec/PHP_III/html_php_ex/server-name-generator.php -->
 <?php 
 
-    $adjectives = ['protective','old-fashioned','lethal','resonant','observant','illustrious','quixotic','sable','rightful','grandiose','unsuitable','vivacious'];
-    $nouns = ['detail','account','tendency','instrument','industry','water','chance','question','step','rice'];
-
+    
     function randomArrayElement($array)
     {
         return $array[mt_rand(0, count($array) - 1)];
@@ -13,6 +11,21 @@
     {
         return randomArrayElement($array1) . " " . randomArrayElement($array2);
     }
+
+    function pageController(){
+
+        $adjectives = ['protective','old-fashioned','lethal','resonant','observant','illustrious','quixotic','sable','rightful','grandiose','unsuitable','vivacious'];
+    $nouns = ['detail','account','tendency','instrument','industry','water','chance','question','step','rice'];
+
+        $data = [];
+
+        $data['randomName'] = randomServerName($adjectives, $nouns);
+
+        return $data;
+
+    }
+
+    extract(pageController());
 
 ?>
 
@@ -48,7 +61,7 @@
 
     <main class="container">
 
-        <h1><?php echo randomServerName($adjectives, $nouns) ?></h1>
+        <h1><?php echo $randomName ?></h1>
 
     </main>
     
