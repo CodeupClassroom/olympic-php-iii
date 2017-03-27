@@ -11,7 +11,7 @@ function pageController() {
 	$data = [];
 	
 	//if a value exists, get that value and assign to variable, else assign default value
-	if(isset($_GET['count'])) {
+	if(isset($_GET['count']) && is_numeric($_GET['count'])) {
 		$data['count'] = $_GET['count'];
 	} else {
 		$data['count'] = 0;
@@ -20,7 +20,7 @@ function pageController() {
 	return $data;
 }
 
-extract(pageContoller());
+extract(pageController());
 
 ?>
 <!DOCTYPE html>
