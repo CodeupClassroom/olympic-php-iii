@@ -1,6 +1,22 @@
 <?php
     $items = array('Item One', 'Item Two', 'Item Three');
     $allItems = array_merge($items, $_POST);
+
+    function output($string) {
+        // parameters are like local variables inside of functions
+        // parameters are given values (assigned) when you call the function and pass it a value
+
+        if(gettype($string) == "array" || gettype($string) == "object") {
+            return;
+        }
+
+        if(strpos($string, "") !== false) {
+            return;
+        }
+        
+        echo htmlspecialchars(strip_tags($string));
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +27,7 @@
     <h1>List of Items</h1>
     <ul>
     <?php foreach ($allItems as $item): ?>
-        <li><?php echo $item; ?></li>
+        <li><?php output($item); ?></li>
     <?php endforeach; ?>
     </ul>
 
