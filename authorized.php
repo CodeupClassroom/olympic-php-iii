@@ -1,3 +1,13 @@
+<?php  
+session_start();
+// if user aint logged in, redirect them to login.php
+if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
+	header("Location: http://php.dev/login.php");
+	die();
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -12,15 +22,23 @@
 	<title>Authorized!</title>
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/paper.min.css">
 
-<!-- Custom CSS -->
-<style></style>
 </head>
 <body>
 	<main class="container">
-		<h1>Authorized!</h1>
-		<img src="/img/200.jpg">
+		<div class="col-md-6 jumbotron">
+			<h1>Authorized!</h1>
+
+			<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+			<p><a class="btn btn-primary btn-lg">Learn more</a></p>
+			<p><a href="/logout.php" class="btn btn-default btn-lg">Logout</a></p>
+
+		</div>
+		
+		<div class="col-md-6 col-md-offset-6">
+			<img src="/img/200.jpg">
+		</div>
 	</main>
 	<!-- minified jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
