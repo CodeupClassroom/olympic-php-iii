@@ -1,10 +1,25 @@
 <?php  
+require_once "Auth.php";
+require_once "Log.php";
+
 session_start();
-// if user aint logged in, redirect them to login.php
-if(!isset($_SESSION['username']) || $_SESSION['username'] != 'admin') {
-	header("Location: http://php.dev/login.php");
-	die();
-} 
+
+function pageController() {
+	// if user aint logged in, redirect them to login.php
+	if(!Auth::check()) {
+		header("Location: http://php.dev/login.php");
+		die();
+	} 
+
+	$log = new Log();
+
+	$message = Auth::user() . " accessed authorized.php";
+
+	$log->info($message);
+}
+
+pageController(); 
+ 
 
 ?>
 

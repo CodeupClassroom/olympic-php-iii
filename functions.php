@@ -2,11 +2,7 @@
 
 function inputHas($key)
 {
-	if (isset($_REQUEST[$key])) {
-		return true;
-	} else {
-		return false;
-	}
+	return isset($_REQUEST[$key]);
 }
 
 function inputGet($key)
