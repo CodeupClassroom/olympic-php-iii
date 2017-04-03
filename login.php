@@ -1,4 +1,9 @@
 <?php 
+
+require_once "Auth.php";
+require_once "Input.php";
+require_once "Log.php";
+
 // start each page with session_start();
 session_start();
 
@@ -10,28 +15,29 @@ function pageController() {
 	$data['usernamePlaceholder'] = "Your user name";
 	$data['background'] = "";
 
-	// if user is logged in already, automatically forward them
-	if(isset($_SESSION['username']) && $_SESSION['username'] == "admin") {
+	if(Auth::check()) {
 		header("Location: http://php.dev/authorized.php");
 		die();
 	}
 
 	// check if user submitted login form
 	if(!empty($_POST)) {
-		$username = isset($_POST['username']) ? $_POST['username'] : "";
-		$password = isset($_POST['password']) ? $_POST['password'] : "";
+		$username = Input::get("username");
+		$password = Input::get("password");
 
-		// if username and password are good, set $_SESSION['username'] and redirect
-		if($username === "admin" && $password === "password") {
-			// set the username on the session array and redirect the user to authorized.php
-			$_SESSION['username'] = $username;
+		$log = new Log();
+
+		if(Auth::attempt($username, $password)) {
+			$log->info("$username logged in successfully. ");
 			header("Location: http://php.dev/authorized.php");
-			die();
+			die();			
 		} else {
+			$log->info("$username failed to log in.");
 			// send a message to the user that their username or password
 			$data['inputClass'] = "form-group has-error";
 			$data['usernamePlaceholder'] = "Username or password is incorrect";
 			$data['background'] = "error";
+			$data['username'] = $username;
 		}
 	} 
 	return $data;

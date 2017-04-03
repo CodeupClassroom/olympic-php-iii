@@ -1,21 +1,11 @@
 <?php
 
-var_dump($_GET);
-
-// on page load, set counter to 0
-// make a button or link that increments the counter by 1
-// make a button or link that decreases the counter by 1
-// add up over time
+require_once "Input.php";
 
 function pageController() {
 	$data = [];
 	
-	//if a value exists, get that value and assign to variable, else assign default value
-	if(isset($_GET['count']) && is_numeric($_GET['count'])) {
-		$data['count'] = $_GET['count'];
-	} else {
-		$data['count'] = 0;
-	}
+	$data['count'] = Input::get("count", 0);
 
 	return $data;
 }

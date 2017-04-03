@@ -1,24 +1,16 @@
 <?php 
-	
+	require_once "Auth.php";
+	require_once "Log.php";
+
 	session_start();
 
-	function clearSession()
-	{
-	    // clear $_SESSION array
-	    session_unset();
-
-	    // ensure client is sent a new session cookie
-	    session_regenerate_id();
-
-	    // delete session data on the server
-	    session_destroy();
-
-	    // start a new session - session_destroy() ended our previous session so
-	    // if we want to store any new data in $_SESSION we must start a new one
-	    session_start();
+	function pageController() {
+		Auth::logout();
+		$log = new Log();
+		$log->info(Auth::user() . " logged out.");	
 	}
-
-	clearSession();
+	
+	pageController();
 ?>
 <!DOCTYPE html>
 <html>

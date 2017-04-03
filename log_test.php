@@ -5,9 +5,9 @@ require_once "Log.php";
 // create a new log object
 $log = new Log();
 
-// log an info message
-$log->info("user logged in");
-$log->info("some other user logged in");
+$log->error('$bob is undefined');
 
-// log an error message;
-$log->error("we're all out of bananas");
+
+$captainsLog = new Log("captainslog");
+$captainsLog->info("On a routine mission to ...");
+
